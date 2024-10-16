@@ -1,7 +1,8 @@
 name: Merge upstream branches
 on:
   schedule:
-    - cron: '*/2 * * * *'  # Runs every 5 minutes
+    #- cron: '*/2 * * * *'  # Runs every 5 minutes
+    - cron: '0 0 * * *' 
 jobs:
   merge:
     runs-on: ubuntu-latest
