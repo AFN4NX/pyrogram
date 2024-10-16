@@ -1675,7 +1675,7 @@ class Story(Object, Update):
         Parameters:
             emoji (``int`` | ``str``, *optional*):
                 Reaction emoji.
-                Pass "" as emoji (default) to retract the reaction.
+                Pass None as emoji (default) to retract the reaction.
 
         Returns:
             ``bool``: On success, True is returned.

@@ -57,6 +57,9 @@ class GiveawayResult(Object):
             Returns the original giveaway start message.
             If the channel is private, returns None
 
+        stars (``int``, *optional*):
+            Stars amount.
+
         description (``str``, *optional*):
             Prize description.
 
@@ -80,6 +83,7 @@ class GiveawayResult(Object):
         until_date: datetime,
         launch_message_id: int,
         launch_message: "types.Message" = None,
+        stars: int = None,
         description: str = None,
         only_new_subscribers: bool = None,
         is_refunded: bool = None
@@ -95,6 +99,7 @@ class GiveawayResult(Object):
         self.until_date = until_date
         self.launch_message_id = launch_message_id
         self.launch_message = launch_message
+        self.stars = stars
         self.description = description
         self.only_new_subscribers = only_new_subscribers
         self.is_refunded = is_refunded
@@ -129,6 +134,7 @@ class GiveawayResult(Object):
             only_new_subscribers=getattr(giveaway_result, "only_new_subscribers", None),
             is_refunded=getattr(giveaway_result, "refunded", None),
             launch_message=launch_message,
+            stars=getattr(giveaway_result, "stars", None),
             description=getattr(giveaway_result, "prize_description", None) or None,
             client=client
         )

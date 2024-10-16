@@ -180,10 +180,6 @@ class Chat(Object):
         permissions (:obj:`~pyrogram.types.ChatPermissions` *optional*):
             Default chat member permissions, for groups and supergroups.
 
-        distance (``int``, *optional*):
-            Distance in meters of this group chat from your location.
-            Returned only in :meth:`~pyrogram.Client.get_nearby_chats`.
-
         personal_channel (:obj:`~pyrogram.types.Chat`, *optional*):
             The personal channel linked to this chat.
             Returned only in :meth:`~pyrogram.Client.get_chat`.
@@ -306,7 +302,6 @@ class Chat(Object):
         members_count: int = None,
         restrictions: List["types.Restriction"] = None,
         permissions: "types.ChatPermissions" = None,
-        distance: int = None,
         personal_channel: "types.Chat" = None,
         personal_channel_message: "types.Message" = None,
         linked_chat: "types.Chat" = None,
@@ -377,7 +372,6 @@ class Chat(Object):
         self.members_count = members_count
         self.restrictions = restrictions
         self.permissions = permissions
-        self.distance = distance
         self.personal_channel = personal_channel
         self.personal_channel_message = personal_channel_message
         self.linked_chat = linked_chat

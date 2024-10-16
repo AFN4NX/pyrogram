@@ -221,7 +221,7 @@ class SendMediaGroup:
                                             w=i.width,
                                             h=i.height
                                         ),
-                                        raw.types.DocumentAttributeFilename(file_name=os.path.basename(i.media))
+                                        raw.types.DocumentAttributeFilename(file_name=i.file_name or os.path.basename(i.media))
                                     ]
                                 ),
                                 business_connection_id=business_connection_id
@@ -275,7 +275,7 @@ class SendMediaGroup:
                                         w=i.width,
                                         h=i.height
                                     ),
-                                    raw.types.DocumentAttributeFilename(file_name=getattr(i.media, "name", "video.mp4"))
+                                    raw.types.DocumentAttributeFilename(file_name=i.file_name or getattr(i.media, "name", "video.mp4"))
                                 ]
                             ),
                             business_connection_id=business_connection_id
@@ -306,7 +306,7 @@ class SendMediaGroup:
                                             performer=i.performer,
                                             title=i.title
                                         ),
-                                        raw.types.DocumentAttributeFilename(file_name=os.path.basename(i.media))
+                                        raw.types.DocumentAttributeFilename(file_name=i.file_name or os.path.basename(i.media))
                                     ]
                                 ),
                                 business_connection_id=business_connection_id
@@ -354,7 +354,7 @@ class SendMediaGroup:
                                         performer=i.performer,
                                         title=i.title
                                     ),
-                                    raw.types.DocumentAttributeFilename(file_name=getattr(i.media, "name", "audio.mp3"))
+                                    raw.types.DocumentAttributeFilename(file_name=i.file_name or getattr(i.media, "name", "audio.mp3"))
                                 ]
                             ),
                             business_connection_id=business_connection_id
@@ -379,7 +379,7 @@ class SendMediaGroup:
                                     file=await self.save_file(i.media),
                                     thumb=await self.save_file(i.thumb),
                                     attributes=[
-                                        raw.types.DocumentAttributeFilename(file_name=os.path.basename(i.media))
+                                        raw.types.DocumentAttributeFilename(file_name=i.file_name or os.path.basename(i.media))
                                     ]
                                 ),
                                 business_connection_id=business_connection_id
@@ -424,7 +424,7 @@ class SendMediaGroup:
                                 file=await self.save_file(i.media),
                                 thumb=await self.save_file(i.thumb),
                                 attributes=[
-                                    raw.types.DocumentAttributeFilename(file_name=getattr(i.media, "name", "file.zip"))
+                                    raw.types.DocumentAttributeFilename(file_name=i.file_name or getattr(i.media, "name", "file.zip"))
                                 ]
                             ),
                             business_connection_id=business_connection_id
@@ -445,7 +445,7 @@ class SendMediaGroup:
                 raw.types.InputSingleMedia(
                     media=media,
                     random_id=self.rnd_id(),
-                    **await self.parser.parse(i.caption, i.parse_mode)
+                    **await utils.parse_text_entities(self, i.caption, i.parse_mode, i.caption_entities)
                 )
             )
 
@@ -477,9 +477,10 @@ class SendMediaGroup:
 
         conn_id = None
 
-        for i in r.updates:
-            if getattr(i, "connection_id", None):
-                conn_id = i.connection_id
+        for u in r.updates:
+            if getattr(u, "connection_id", None):
+                conn_id = u.connection_id
+                break
 
 
         return await utils.parse_messages(

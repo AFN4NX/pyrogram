@@ -18,15 +18,15 @@
 import re
 
 import pyrogram
-from pyrogram import raw, types
+from pyrogram import raw
 
 
-class CheckGiftCode:
-    async def check_gift_code(
+class ApplyGiftCode:
+    async def apply_gift_code(
         self: "pyrogram.Client",
         link: str,
-    ) -> "types.CheckedGiftCode":
-        """Get information about a gift code.
+    ) -> bool:
+        """Apply a gift code.
 
         .. include:: /_includes/usable-by/users.rst
 
@@ -35,16 +35,16 @@ class CheckGiftCode:
                 The gift code link.
 
         Returns:
-            :obj:`~pyrogram.types.CheckedGiftCode`: On success, a checked gift code is returned.
+            ``bool``: On success, True is returned.
 
         Raises:
-            ValueError: In case the folder invite link is invalid.
+            ValueError: In case the gift code link is invalid.
 
         Example:
             .. code-block:: python
 
-                # get information about a gift code
-                app.check_gift_code("t.me/giftcode/abc1234567def")
+                # apply a gift code
+                app.apply_gift_code("t.me/giftcode/abc1234567def")
         """
         match = re.match(r"^(?:https?://)?(?:www\.)?(?:t(?:elegram)?\.(?:org|me|dog)/(?:giftcode/|\+))([\w-]+)$", link)
 
@@ -55,13 +55,10 @@ class CheckGiftCode:
         else:
             raise ValueError("Invalid gift code link")
 
-        r = await self.invoke(
-            raw.functions.payments.CheckGiftCode(
+        await self.invoke(
+            raw.functions.payments.ApplyGiftCode(
                 slug=slug
             )
         )
 
-        users = {i.id: i for i in r.users}
-        chats = {i.id: i for i in r.chats}
-
-        return types.CheckedGiftCode._parse(self, r, users, chats)
+        return True

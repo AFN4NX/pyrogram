@@ -113,3 +113,6 @@ class MessageServiceType(AutoName):
 
     JOIN_REQUEST_APPROVED = auto()
     "Join request approved"
+
+    STAR_GIFT = auto()
+    "Star gift"

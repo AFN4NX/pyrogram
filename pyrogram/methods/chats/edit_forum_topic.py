@@ -56,7 +56,7 @@ class EditForumTopic:
                 Hide forum topic.
 
         Returns:
-            `bool`: On success, a Boolean is returned.
+            ``bool``: On success, True is returned.
 
         Example:
             .. code-block:: python

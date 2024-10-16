@@ -101,6 +101,19 @@ PreCheckoutQuery
 
     {pre_checkout_query_toctree}
 
+ShippingQuery
+----------------
+
+.. hlist::
+    :columns: 2
+
+    {shipping_query_hlist}
+
+.. toctree::
+    :hidden:
+
+    {shipping_query_toctree}
+
 ChatJoinRequest
 ---------------
 
@@ -152,3 +165,16 @@ ActiveSession
     :hidden:
 
     {active_session_toctree}
+
+StarGift
+--------
+
+.. hlist::
+    :columns: 2
+
+    {star_gift_hlist}
+
+.. toctree::
+    :hidden:
+
+    {star_gift_toctree}

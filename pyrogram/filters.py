@@ -371,6 +371,17 @@ gift_code = create(gift_code_filter)
 
 # endregion
 
+# region star_gift_filter
+async def star_gift_filter(_, __, m: Message):
+    return bool(m.star_gift)
+
+
+star_gift = create(star_gift_filter)
+"""Filter messages that contain :obj:`~pyrogram.types.StarGift` objects."""
+
+
+# endregion
+
 # region requested_chats_filter
 async def requested_chats_filter(_, __, m: Message):
     return bool(m.requested_chats)

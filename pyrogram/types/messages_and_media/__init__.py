@@ -21,6 +21,7 @@ from .audio import Audio
 from .available_effect import AvailableEffect
 from .boosts_status import BoostsStatus
 from .business_message import BusinessMessage
+from .chat_boost import ChatBoost
 from .checked_gift_code import CheckedGiftCode
 from .contact import Contact
 from .dice import Dice
@@ -49,6 +50,7 @@ from .photo import Photo
 from .poll import Poll
 from .poll_option import PollOption
 from .reaction import Reaction
+from .star_gift import StarGift
 from .sticker import Sticker
 from .story import Story
 from .stripped_thumbnail import StrippedThumbnail
@@ -67,6 +69,7 @@ __all__ = [
     "AvailableEffect",
     "BoostsStatus",
     "BusinessMessage",
+    "ChatBoost",
     "CheckedGiftCode",
     "Contact",
     "Dice",
@@ -95,6 +98,7 @@ __all__ = [
     "Poll",
     "PollOption",
     "Reaction",
+    "StarGift",
     "Sticker",
     "Story",
     "StrippedThumbnail",
