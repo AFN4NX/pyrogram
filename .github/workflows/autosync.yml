@@ -1,8 +1,8 @@
 name: Merge upstream branches
 on:
   schedule:
-    #- cron: '*/2 * * * *'  # Runs every 5 minutes
-    - cron: '0 0 * * *' 
+    - cron: '*/2 * * * *'  # Runs every 5 minutes
+    #- cron: '0 0 * * *' 
 jobs:
   merge:
     runs-on: ubuntu-latest
@@ -16,15 +16,15 @@ jobs:
           git config --global user.name 'afn4nx'
           git config --global user.email 'novpn525@gmail.com'
 
-      - name: Merge upstream feature/x branch
+      - name: Merge upstream feature/dev branch
         run: |
           git remote add upstream https://github.com/KurimuzonAkuma/pyrogram.git
           git fetch upstream
 
           # Check out the local feature/x branch and merge upstream/feature/x
-          git checkout -b feature/x origin/feature/x
-          git merge --no-edit upstream/feature/x
-          git push origin feature/x
+          git checkout -b dev origin/dev
+          git merge --no-edit upstream/dev
+          git push origin dev
 
       - name: Merge upstream dev branch
         run: |
