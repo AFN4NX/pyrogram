@@ -3,7 +3,7 @@ name: Sync with upstream
 on:
   schedule:
     # Runs every day at midnight
-    - cron: '*/1 * * * *'
+    - cron: '*/2 * * * *'
 
 jobs:
   sync:
