@@ -2,32 +2,36 @@ name: Merge upstream branches
 on:
   schedule:
     - cron: '*/2 * * * *'  # Runs every 5 minutes
-    #- cron: '0 0 * * *' 
+    #- cron: '0 0 * * *'  # Uncomment if you want to run it daily
+
 jobs:
   merge:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Fetch the full history to avoid shallow clone issues
 
+    steps:
+      # Step 1: Check out your fork's code
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
+          fetch-depth: 0  # Fetch full history for merging
+
+      # Step 2: Set up git user for commits
       - name: Configure git
         run: |
           git config --global user.name 'afn4nx'
           git config --global user.email 'novpn525@gmail.com'
 
-      - name: Merge upstream feature/dev branch
+      # Step 3: Merge upstream dev branch into local dev branch
+      - name: Merge upstream dev branch
         run: |
           git remote add upstream https://github.com/KurimuzonAkuma/pyrogram.git
           git fetch upstream
-
-          # Check out the local feature/x branch and merge upstream/feature/x
-          git checkout -b dev origin/dev
+          
+          # Check out local dev branch; create if it doesn't exist
+          git checkout -b dev origin/dev || git checkout dev
+          
+          # Merge upstream/dev into the local dev branch
           git merge --no-edit upstream/dev
-          git push origin dev
-
-      - name: Merge upstream dev branch
-        run: |
-          git checkout dev
-          git merge --no-edit upstream/dev
+          
+          # Push the merged dev branch to your fork's origin
           git push origin dev
