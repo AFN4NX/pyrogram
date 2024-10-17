@@ -1,8 +1,8 @@
 name: Merge upstream branches
 on:
   schedule:
-    - cron: '*/2 * * * *'  # Runs every 5 minutes
-    #- cron: '0 0 * * *'  # Uncomment if you want to run it daily
+    #- cron: '*/2 * * * *'  # Runs every 5 minutes
+    - cron: '0 0 * * *' # daily at midnight
 
 jobs:
   merge:
