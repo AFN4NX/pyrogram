@@ -1,0 +1,36 @@
+name: Sync with upstream
+
+on:
+  schedule:
+    # Runs every day at midnight
+    - cron: '*/1 * * * *'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out your fork's code
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0  # Fetch full history for merging
+
+      # Step 2: Set up git user for commit
+      - name: Set up Git
+        run: |
+          git config --global user.name 'afn4nx'
+          git config --global user.email 'novpn525@gmail.com'
+
+      # Step 3: Add upstream repository
+      - name: Add upstream repository
+        run: |
+          git remote add upstream https://github.com/KurimuzonAkuma/pyrogram.git
+          git fetch upstream
+
+      # Step 4: Sync dev branch
+      - name: Sync upstream dev branch
+        run: |
+          git checkout dev  # Replace 'dev' with the branch you want to sync
+          git merge --no-edit upstream/dev  # Merge upstream/dev into your dev
+          git push origin dev  # Push changes to your fork
