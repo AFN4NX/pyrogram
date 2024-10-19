@@ -36,7 +36,8 @@ async def get_chunk(
     limit: int = 100,
     min_id: int = 0,
     max_id: int = 0,
-    from_user: Union[int, str] = None
+    from_user: Union[int, str] = None,
+    message_thread_id: Optional[int] = None
 ) -> List["types.Message"]:
     r = await client.invoke(
         raw.functions.messages.Search(
@@ -55,6 +56,7 @@ async def get_chunk(
                 if from_user
                 else None
             ),
+            top_msg_id=message_thread_id,
             hash=0
         ),
         sleep_threshold=60
@@ -77,7 +79,8 @@ class SearchMessages:
         max_id: int = 0,
         filter: "enums.MessagesFilter" = enums.MessagesFilter.EMPTY,
         limit: int = 0,
-        from_user: Union[int, str] = None
+        from_user: Union[int, str] = None,
+        message_thread_id: Optional[int] = None
     ) -> AsyncGenerator["types.Message", None]:
         """Search for text and media messages inside a specific chat.
 
@@ -114,7 +117,7 @@ class SearchMessages:
                 If a positive value was provided, the method will return only messages with IDs more than min_id.
 
             max_id (``int``, *optional*):
-                If a positive value was provided, the method will return only messages with IDs less than max_id.      
+                If a positive value was provided, the method will return only messages with IDs less than max_id.
 
             filter (:obj:`~pyrogram.enums.MessagesFilter`, *optional*):
                 Pass a filter in order to search for specific kind of messages only.
@@ -126,6 +129,10 @@ class SearchMessages:
 
             from_user (``int`` | ``str``, *optional*):
                 Unique identifier (int) or username (str) of the target user you want to search for messages from.
+
+            message_thread_id (``int``, *optional*):
+                Unique identifier for the target message thread (topic) of the forum.
+                For supergroups only.
 
         Returns:
             ``Generator``: A generator yielding :obj:`~pyrogram.types.Message` objects.
@@ -165,7 +172,8 @@ class SearchMessages:
                 min_id=min_id,
                 max_id=max_id,
                 limit=limit,
-                from_user=from_user
+                from_user=from_user,
+                message_thread_id=message_thread_id
             )
 
             if not messages:
