@@ -25,6 +25,9 @@ from .create_invoice_link import CreateInvoiceLink
 from .delete_bot_commands import DeleteBotCommands
 from .get_bot_commands import GetBotCommands
 from .get_bot_default_privileges import GetBotDefaultPrivileges
+from .get_bot_info_description import GetBotInfoDescription
+from .get_bot_info_short_description import GetBotInfoShortDescription
+from .get_bot_name import GetBotName
 from .get_chat_menu_button import GetChatMenuButton
 from .get_game_high_scores import GetGameHighScores
 from .get_inline_bot_results import GetInlineBotResults
@@ -35,6 +38,9 @@ from .send_inline_bot_result import SendInlineBotResult
 from .send_invoice import SendInvoice
 from .set_bot_commands import SetBotCommands
 from .set_bot_default_privileges import SetBotDefaultPrivileges
+from .set_bot_info_description import SetBotInfoDescription
+from .set_bot_info_short_description import SetBotInfoShortDescription
+from .set_bot_name import SetBotName
 from .set_chat_menu_button import SetChatMenuButton
 from .set_game_score import SetGameScore
 
@@ -57,7 +63,13 @@ class Bots(
     GetBotCommands,
     DeleteBotCommands,
     SetBotDefaultPrivileges,
+    SetBotInfoDescription,
+    SetBotInfoShortDescription,
+    SetBotName,
     GetBotDefaultPrivileges,
+    GetBotInfoDescription,
+    GetBotInfoShortDescription,
+    GetBotName,
     SetChatMenuButton,
     GetChatMenuButton,
     AnswerWebAppQuery

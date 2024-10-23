@@ -367,6 +367,12 @@ def pyrogram_api():
             answer_shipping_query
             create_invoice_link
             refund_star_payment
+            set_bot_info_description
+            get_bot_info_description
+            set_bot_info_short_description
+            get_bot_info_short_description
+            set_bot_name
+            get_bot_name
         """,
         business="""
         Business

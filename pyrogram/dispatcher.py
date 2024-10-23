@@ -22,9 +22,7 @@ import logging
 from collections import OrderedDict
 
 import pyrogram
-from pyrogram import errors
 from pyrogram import utils
-from pyrogram import raw
 from pyrogram.handlers import (
     CallbackQueryHandler, MessageHandler, EditedMessageHandler, DeletedMessagesHandler,
     UserStatusHandler, RawUpdateHandler, InlineQueryHandler, PollHandler, PreCheckoutQueryHandler,
@@ -41,7 +39,7 @@ from pyrogram.raw.types import (
     UpdateBotInlineSend, UpdateChatParticipant, UpdateChannelParticipant,
     UpdateBotChatInviteRequester, UpdateStory, UpdateBotShippingQuery, UpdateBotMessageReaction,
     UpdateBotMessageReactions, UpdateBotChatBoost, UpdateBusinessBotCallbackQuery,
-    UpdateBotPurchasedPaidMedia
+    UpdateBotPurchasedPaidMedia, UpdateMessagePollVote
 )
 
 log = logging.getLogger(__name__)
@@ -55,7 +53,7 @@ class Dispatcher:
     CHAT_MEMBER_UPDATES = (UpdateChatParticipant, UpdateChannelParticipant)
     USER_STATUS_UPDATES = (UpdateUserStatus,)
     BOT_INLINE_QUERY_UPDATES = (UpdateBotInlineQuery,)
-    POLL_UPDATES = (UpdateMessagePoll,)
+    POLL_UPDATES = (UpdateMessagePoll, UpdateMessagePollVote)
     CHOSEN_INLINE_RESULT_UPDATES = (UpdateBotInlineSend,)
     CHAT_JOIN_REQUEST_UPDATES = (UpdateBotChatInviteRequester,)
     NEW_STORY_UPDATES = (UpdateStory,)
@@ -128,7 +126,7 @@ class Dispatcher:
 
         async def poll_parser(update, users, chats):
             return (
-                pyrogram.types.Poll._parse_update(self.client, update),
+                pyrogram.types.Poll._parse_update(self.client, update, users),
                 PollHandler
             )
 

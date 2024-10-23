@@ -71,10 +71,6 @@ class ChosenInlineResult(Object, Update):
 
     @staticmethod
     def _parse(client, chosen_inline_result: raw.types.UpdateBotInlineSend, users) -> "ChosenInlineResult":
-        inline_message_id = utils.pack_inline_message_id(
-            chosen_inline_result.msg_id
-        )
-
         return ChosenInlineResult(
             result_id=str(chosen_inline_result.id),
             from_user=types.User._parse(client, users[chosen_inline_result.user_id]),
@@ -84,5 +80,7 @@ class ChosenInlineResult(Object, Update):
                 latitude=chosen_inline_result.geo.lat,
                 client=client
             ) if chosen_inline_result.geo else None,
-            inline_message_id=inline_message_id
+            inline_message_id=utils.pack_inline_message_id(
+                chosen_inline_result.msg_id
+            ) if getattr(chosen_inline_result, "msg_id", None) else None
         )
