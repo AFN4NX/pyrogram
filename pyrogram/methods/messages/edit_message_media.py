@@ -35,7 +35,7 @@ class EditMessageMedia:
         chat_id: Union[int, str],
         message_id: int,
         media: "types.InputMedia",
-        show_above_text: bool = None,
+        show_caption_above_media: bool = None,
         schedule_date: datetime = None,
         reply_markup: "types.InlineKeyboardMarkup" = None,
         file_name: str = None
@@ -59,9 +59,8 @@ class EditMessageMedia:
             media (:obj:`~pyrogram.types.InputMedia`):
                 One of the InputMedia objects describing an animation, audio, document, photo or video.
 
-            show_above_text (``bool``, *optional*):
-                If True, link preview will be shown above the message text.
-                Otherwise, the link preview will be shown below the message text.
+            show_caption_above_media (``bool``, *optional*):
+                Pass True, if the caption must be shown above the message media.
 
             schedule_date (:py:obj:`~datetime.datetime`, *optional*):
                 Date when the message will be automatically sent.
@@ -282,7 +281,7 @@ class EditMessageMedia:
             raw.functions.messages.EditMessage(
                 peer=await self.resolve_peer(chat_id),
                 id=message_id,
-                invert_media=show_above_text,
+                invert_media=show_caption_above_media,
                 media=media,
                 schedule_date=utils.datetime_to_timestamp(schedule_date),
                 reply_markup=await reply_markup.write(self) if reply_markup else None,

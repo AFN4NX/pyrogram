@@ -45,6 +45,7 @@ class SendStarGift:
 
             star_gift_id (``int``):
                 Unique identifier of star gift.
+                To get all available star gifts use :meth:`~pyrogram.Client.get_star_gifts`.
 
             text (``str``, *optional*):
                 Text of the message to be sent.
@@ -58,6 +59,7 @@ class SendStarGift:
 
             hide_my_name (``bool``, *optional*):
                 If True, your name will be hidden from visitors to the gift recipient's profile.
+                Defaults to None.
 
         Returns:
             ``bool``: On success, True is returned.
@@ -79,7 +81,7 @@ class SendStarGift:
             user_id=peer,
             gift_id=star_gift_id,
             hide_name=hide_my_name,
-            message=raw.types.TextWithEntities(text=text, entities=entities) if text else None
+            message=raw.types.TextWithEntities(text=text, entities=entities or []) if text else None
         )
 
         form = await self.invoke(

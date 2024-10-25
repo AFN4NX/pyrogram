@@ -41,7 +41,7 @@ class CopyMediaGroup:
         quote_entities: List["types.MessageEntity"] = None,
         quote_offset: int = None,
         schedule_date: datetime = None,
-        show_above_text: bool = None,
+        show_caption_above_media: bool = None,
     ) -> List["types.Message"]:
         """Copy a media group by providing one of the message ids.
 
@@ -103,9 +103,8 @@ class CopyMediaGroup:
             schedule_date (:py:obj:`~datetime.datetime`, *optional*):
                 Date when the message will be automatically sent.
 
-            show_above_text (``bool``, *optional*):
-                If True, link preview will be shown above the message text.
-                Otherwise, the link preview will be shown below the message text.
+            show_caption_above_media (``bool``, *optional*):
+                Pass True, if the caption must be shown above the message media.
 
         Returns:
             List of :obj:`~pyrogram.types.Message`: On success, a list of copied messages is returned.
@@ -178,7 +177,7 @@ class CopyMediaGroup:
                     quote_offset=quote_offset,
                 ),
                 schedule_date=utils.datetime_to_timestamp(schedule_date),
-                invert_media=show_above_text
+                invert_media=show_caption_above_media
             ),
             sleep_threshold=60
         )

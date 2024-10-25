@@ -86,7 +86,6 @@ class SuccessfulPayment(Object):
 
     @staticmethod
     def _parse(
-        client: "pyrogram.Client",
         successful_payment: Union[
             "raw.types.MessageActionPaymentSent",
             "raw.types.MessageActionPaymentSentMe"

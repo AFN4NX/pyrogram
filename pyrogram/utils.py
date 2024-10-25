@@ -31,10 +31,8 @@ from typing import Union, List, Dict, Optional
 import pyrogram
 from pyrogram import raw, enums
 from pyrogram import types
-from pyrogram.errors import AuthBytesInvalid
+from pyrogram.types.messages_and_media.message import Str
 from pyrogram.file_id import FileId, FileType, PHOTO_TYPES, DOCUMENT_TYPES
-from pyrogram.session import Session
-from pyrogram.session.auth import Auth
 
 
 async def ainput(prompt: str = "", *, hide: bool = False):
@@ -501,15 +499,17 @@ def get_first_url(text):
 
 
 def parse_text_with_entities(client, message: "raw.types.TextWithEntities", users):
+    entities = types.List(
+        filter(
+            lambda x: x is not None,
+            [
+                types.MessageEntity._parse(client, entity, users)
+                for entity in getattr(message, "entities", [])
+            ]
+        )
+    )
+
     return {
-        "text": getattr(message, "text", None),
-        "entities": types.List(
-            filter(
-                lambda x: x is not None,
-                [
-                    types.MessageEntity._parse(client, entity, users)
-                    for entity in getattr(message, "entities", [])
-                ]
-            )
-        ) or None
+        "text": Str(getattr(message, "text", "")).init(entities) or None,
+        "entities": entities or None
     }

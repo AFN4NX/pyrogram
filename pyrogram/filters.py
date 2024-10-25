@@ -349,13 +349,13 @@ giveaway = create(giveaway_filter)
 
 # endregion
 
-# region giveaway_result_filter
-async def giveaway_result_filter(_, __, m: Message):
-    return bool(m.giveaway_result)
+# region giveaway_winners_filter
+async def giveaway_winners_filter(_, __, m: Message):
+    return bool(m.giveaway_winners)
 
 
-giveaway_result = create(giveaway_result_filter)
-"""Filter messages that contain :obj:`~pyrogram.types.GiveawayResult` objects."""
+giveaway_winners = create(giveaway_winners_filter)
+"""Filter messages that contain :obj:`~pyrogram.types.GiveawayWinners` objects."""
 
 
 # endregion

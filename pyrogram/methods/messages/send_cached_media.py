@@ -43,7 +43,7 @@ class SendCachedMedia:
         schedule_date: datetime = None,
         protect_content: bool = None,
         has_spoiler: bool = None,
-        show_above_text: bool = None,
+        show_caption_above_media: bool = None,
         business_connection_id: str = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
@@ -112,9 +112,8 @@ class SendCachedMedia:
             has_spoiler (``bool``, *optional*):
                 True, if the message media is covered by a spoiler animation.
 
-            show_above_text (``bool``, *optional*):
-                If True, link preview will be shown above the message text.
-                Otherwise, the link preview will be shown below the message text.
+            show_caption_above_media (``bool``, *optional*):
+                Pass True, if the caption must be shown above the message media.
 
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
@@ -139,7 +138,7 @@ class SendCachedMedia:
                 peer=peer,
                 media=utils.get_input_media_from_file_id(file_id, has_spoiler=has_spoiler),
                 silent=disable_notification or None,
-                invert_media=show_above_text,
+                invert_media=show_caption_above_media,
                 reply_to=utils.get_reply_to(
                     reply_to_message_id=reply_to_message_id,
                     message_thread_id=message_thread_id,

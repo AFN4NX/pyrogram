@@ -36,10 +36,10 @@ class StarGift(Object):
         sticker (:obj:`~pyrogram.types.Sticker`):
             Information about the star gift sticker.
 
-        text (``str``, *optional*):
+        caption (``str``, *optional*):
             Text message.
 
-        entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
+        caption_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
             For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text.
 
         message_id (``int``, *optional*):
@@ -81,8 +81,8 @@ class StarGift(Object):
         client: "pyrogram.Client" = None,
         id: int,
         sticker: "types.Sticker",
-        text: Optional[str] = None,
-        entities: List["types.MessageEntity"] = None,
+        caption: Optional[str] = None,
+        caption_entities: List["types.MessageEntity"] = None,
         message_id: Optional[int] = None,
         date: Optional[datetime] = None,
         from_user: Optional["types.User"] = None,
@@ -98,8 +98,8 @@ class StarGift(Object):
 
         self.id = id
         self.sticker = sticker
-        self.text = text
-        self.entities = entities
+        self.caption = caption
+        self.caption_entities = caption_entities
         self.message_id = message_id
         self.date = date
         self.from_user = from_user
@@ -139,6 +139,12 @@ class StarGift(Object):
         doc = user_star_gift.gift.sticker
         attributes = {type(i): i for i in doc.attributes}
 
+        caption, caption_entities = (
+            utils.parse_text_with_entities(
+                client, getattr(user_star_gift, "message", None), users
+            )
+        ).values()
+
         return StarGift(
             id=user_star_gift.gift.id,
             sticker=await types.Sticker._parse(client, doc, attributes),
@@ -152,7 +158,8 @@ class StarGift(Object):
             is_saved=not user_star_gift.unsaved if getattr(user_star_gift, "unsaved", None) else None,
             from_user=types.User._parse(client, users.get(user_star_gift.from_id)) if getattr(user_star_gift, "from_id", None) else None,
             message_id=getattr(user_star_gift, "msg_id", None),
-            **utils.parse_text_with_entities(client, getattr(user_star_gift, "message", None), users),
+            caption=caption,
+            caption_entities=caption_entities,
             client=client
         )
 
@@ -167,6 +174,12 @@ class StarGift(Object):
         doc = action.gift.sticker
         attributes = {type(i): i for i in doc.attributes}
 
+        caption, caption_entities = (
+            utils.parse_text_with_entities(
+                client, getattr(action, "message", None), users
+            )
+        ).values()
+
         return StarGift(
             id=action.gift.id,
             sticker=await types.Sticker._parse(client, doc, attributes),
@@ -180,12 +193,13 @@ class StarGift(Object):
             is_saved=getattr(action, "saved", None),
             from_user=types.User._parse(client, users.get(utils.get_raw_peer_id(message.peer_id))),
             message_id=message.id,
-            **utils.parse_text_with_entities(client, getattr(action, "message", None), users),
+            caption=caption,
+            caption_entities=caption_entities,
             client=client
         )
 
-    async def save(self) -> bool:
-        """Bound method *save* of :obj:`~pyrogram.types.StarGift`.
+    async def show(self) -> bool:
+        """Bound method *show* of :obj:`~pyrogram.types.StarGift`.
 
         Use as a shortcut for:
 
@@ -199,7 +213,7 @@ class StarGift(Object):
         Example:
             .. code-block:: python
 
-                await star_gift.save()
+                await star_gift.show()
 
         Returns:
             ``bool``: On success, True is returned.
