@@ -9,19 +9,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out your fork's code
+
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
-          fetch-depth: 0  # Fetch full history for merging
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0 
 
-      # Step 2: Set up git user for commits
+
       - name: Configure git
         run: |
           git config --global user.name 'afn4nx'
           git config --global user.email 'novpn525@gmail.com'
 
-      # Step 3: Merge upstream dev branch into local dev branch
       - name: Merge upstream dev branch
         run: |
           git remote add upstream https://github.com/KurimuzonAkuma/pyrogram.git
