@@ -23,14 +23,13 @@ from pyrogram import raw
 from pyrogram import types
 
 
-class PinStories:
-    async def pin_stories(
+class UnpinChatStories:
+    async def unpin_chat_stories(
         self: "pyrogram.Client",
         chat_id: Union[int, str],
-        stories_ids: Union[int, Iterable[int]],
-        pinned: bool = False,
+        stories_ids: Union[int, Iterable[int]]
     ) -> List[int]:
-        """Pin one or more stories in a chat by using stories identifiers.
+        """Unpin one or more stories in a chat by using stories identifiers.
 
         .. include:: /_includes/usable-by/users.rst
 
@@ -42,17 +41,14 @@ class PinStories:
             stories_ids (``int`` | Iterable of ``int``, *optional*):
                 List of unique identifiers of the target stories.
 
-            pinned (``bool``):
-                If set to ``True``, the stories will be pinned.
-
         Returns:
-            List of ``int``: List of pinned stories IDs
+            List of ``int``: List of pinned stories identifiers.
 
         Example:
             .. code-block:: python
 
-                # Pin a single story
-                await app.pin_stories(chat_id, 123456789, True)
+                # Unpin a single story
+                await app.unpin_chat_stories(chat_id, 123456789)
 
         """
         is_iterable = not isinstance(stories_ids, int)
@@ -62,7 +58,7 @@ class PinStories:
             raw.functions.stories.TogglePinned(
                 peer=await self.resolve_peer(chat_id),
                 id=stories_ids,
-                pinned=pinned
+                pinned=False
             )
         )
 

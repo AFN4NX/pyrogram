@@ -46,7 +46,7 @@ class SendStory:
         progress: Callable = None,
         progress_args: tuple = ()
     ) -> "types.Story":
-        """Send new story.
+        """Post new story.
 
         .. include:: /_includes/usable-by/users.rst
 

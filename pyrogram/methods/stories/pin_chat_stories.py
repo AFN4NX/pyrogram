@@ -23,13 +23,13 @@ from pyrogram import raw
 from pyrogram import types
 
 
-class DeleteStories:
-    async def delete_stories(
+class PinChatStories:
+    async def pin_chat_stories(
         self: "pyrogram.Client",
         chat_id: Union[int, str],
-        story_ids: Union[int, Iterable[int]],
+        stories_ids: Union[int, Iterable[int]]
     ) -> List[int]:
-        """Delete posted stories.
+        """Pin one or more stories in a chat by using stories identifiers.
 
         .. include:: /_includes/usable-by/users.rst
 
@@ -38,28 +38,27 @@ class DeleteStories:
                 Unique identifier (int) or username (str) of the target chat.
                 For your personal cloud (Saved Messages) you can simply use "me" or "self".
 
-            story_ids (``int`` | Iterable of ``int``, *optional*):
-                Unique identifier (int) or list of unique identifiers (list of int) for the target stories.
+            stories_ids (``int`` | Iterable of ``int``, *optional*):
+                List of unique identifiers of the target stories.
 
         Returns:
-            List of ``int``: List of deleted stories IDs.
+            List of ``int``: List of pinned stories IDs
 
         Example:
             .. code-block:: python
 
-                # Delete a single story
-                app.delete_stories(chat_id, 1)
+                # Pin a single story
+                await app.pin_chat_stories(chat_id, 123456789)
 
-                # Delete multiple stories
-                app.delete_stories(chat_id, [1, 2])
         """
-        is_iterable = not isinstance(story_ids, int)
-        ids = list(story_ids) if is_iterable else [story_ids]
+        is_iterable = not isinstance(stories_ids, int)
+        stories_ids = list(stories_ids) if is_iterable else [stories_ids]
 
         r = await self.invoke(
-            raw.functions.stories.DeleteStories(
+            raw.functions.stories.TogglePinned(
                 peer=await self.resolve_peer(chat_id),
-                id=ids
+                id=stories_ids,
+                pinned=True
             )
         )
 

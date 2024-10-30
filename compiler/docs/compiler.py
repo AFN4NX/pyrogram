@@ -408,7 +408,7 @@ def pyrogram_api():
         """,
         stories="""
         Stories
-            can_send_story
+            can_post_stories
             copy_story
             delete_stories
             edit_story_caption
@@ -418,12 +418,14 @@ def pyrogram_api():
             get_all_stories
             get_chat_stories
             get_pinned_stories
-            get_stories_archive
+            get_archived_stories
             get_stories
-            hide_stories
+            hide_chat_stories
+            show_chat_stories
             view_stories
-            pin_stories
-            read_stories
+            pin_chat_stories
+            unpin_chat_stories
+            read_chat_stories
             send_story
         """,
         premium="""
@@ -795,6 +797,7 @@ def pyrogram_api():
         """,
         story="""
         Story
+            Story.reply
             Story.reply_text
             Story.reply_animation
             Story.reply_audio

@@ -22,31 +22,34 @@ import pyrogram
 from pyrogram import raw
 
 
-class CanSendStory:
-    async def can_send_story(
+class HideChatStories:
+    async def hide_chat_stories(
         self: "pyrogram.Client",
         chat_id: Union[int, str],
     ) -> bool:
-        """Can send story
+        """Hide the active stories of a user, preventing them from being displayed on the action bar on the homescreen.
 
         .. include:: /_includes/usable-by/users.rst
 
         Parameters:
             chat_id (``int`` | ``str``):
                 Unique identifier (int) or username (str) of the target chat.
+                For your personal cloud (Saved Messages) you can simply use "me" or "self".
+                For a contact that exists in your Telegram address book you can use his phone number (str).
 
         Returns:
-            ``str``: On success, a bool is returned.
+            ``bool``: On success, a bool is returned.
 
         Example:
             .. code-block:: python
 
-                # Check if you can send story to chat id
-                app.can_send_story(chat_id)
+                # Hide stories from specific chat
+                app.hide_chat_stories(chat_id)
         """
         r = await self.invoke(
-            raw.functions.stories.CanSendStory(
+            raw.functions.stories.TogglePeerStoriesHidden(
                 peer=await self.resolve_peer(chat_id),
+                hidden=True
             )
         )
 

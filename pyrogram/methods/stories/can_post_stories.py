@@ -16,48 +16,38 @@
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import List, Union
+from typing import Union
 
 import pyrogram
-from pyrogram import raw, types
+from pyrogram import raw
 
 
-class ReadStories:
-    async def read_stories(
+class CanPostStories:
+    async def can_post_stories(
         self: "pyrogram.Client",
         chat_id: Union[int, str],
-        max_id: int = 0,
-    ) -> List[int]:
-        """Read stories.
+    ) -> bool:
+        """Check whether we can post stories as the specified chat.
 
         .. include:: /_includes/usable-by/users.rst
 
         Parameters:
             chat_id (``int`` | ``str``):
                 Unique identifier (int) or username (str) of the target chat.
-                For a contact that exists in your Telegram address book you can use his phone number (str).
-
-            max_id (``int``, *optional*):
-                The id of the last story you want to mark as read; all the stories before this one will be marked as
-                read as well. Defaults to 0 (mark every unread message as read).
 
         Returns:
-            List of ``int``: On success, a list of read stories is returned.
+            ``bool``: On success, True is returned.
 
         Example:
             .. code-block:: python
 
-                # Read all stories
-                await app.read_stories(chat_id)
-
-                # Mark stories as read only up to the given story id
-                await app.read_stories(chat_id, 123)
+                # Check if you can send story to chat id
+                app.can_post_stories(chat_id)
         """
         r = await self.invoke(
-            raw.functions.stories.ReadStories(
+            raw.functions.stories.CanSendStory(
                 peer=await self.resolve_peer(chat_id),
-                max_id=max_id or (1 << 31) - 1
             )
         )
 
-        return types.List(r)
+        return r

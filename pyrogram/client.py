@@ -548,25 +548,26 @@ class Client(Methods):
     async def fetch_peers(self, peers: List[Union[raw.types.User, raw.types.Chat, raw.types.Channel]]) -> bool:
         is_min = False
         parsed_peers = []
+        parsed_usernames = []
 
         for peer in peers:
             if getattr(peer, "min", False):
                 is_min = True
                 continue
 
-            usernames = None
+            usernames = []
             phone_number = None
 
             if isinstance(peer, raw.types.User):
                 peer_id = peer.id
                 access_hash = peer.access_hash
-                usernames = (
-                    [peer.username.lower()] if peer.username
-                    else [username.username.lower() for username in peer.usernames] if peer.usernames
-                    else None
-                )
                 phone_number = peer.phone
                 peer_type = "bot" if peer.bot else "user"
+
+                if peer.username:
+                    usernames.append(peer.username.lower())
+                elif peer.usernames:
+                    usernames.extend(username.username.lower() for username in peer.usernames)
             elif isinstance(peer, (raw.types.Chat, raw.types.ChatForbidden)):
                 peer_id = -peer.id
                 access_hash = 0
@@ -574,12 +575,12 @@ class Client(Methods):
             elif isinstance(peer, raw.types.Channel):
                 peer_id = utils.get_channel_id(peer.id)
                 access_hash = peer.access_hash
-                usernames = (
-                    [peer.username.lower()] if peer.username
-                    else [username.username.lower() for username in peer.usernames] if peer.usernames
-                    else None
-                )
                 peer_type = "channel" if peer.broadcast else "supergroup"
+
+                if peer.username:
+                    usernames.append(peer.username.lower())
+                elif peer.usernames:
+                    usernames.extend(username.username.lower() for username in peer.usernames)
             elif isinstance(peer, raw.types.ChannelForbidden):
                 peer_id = utils.get_channel_id(peer.id)
                 access_hash = peer.access_hash
@@ -587,9 +588,11 @@ class Client(Methods):
             else:
                 continue
 
-            parsed_peers.append((peer_id, access_hash, peer_type, usernames, phone_number))
+            parsed_peers.append((peer_id, access_hash, peer_type, phone_number))
+            parsed_usernames.append((peer_id, usernames))
 
         await self.storage.update_peers(parsed_peers)
+        await self.storage.update_usernames(parsed_usernames)
 
         return is_min
 

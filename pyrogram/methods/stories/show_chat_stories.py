@@ -22,13 +22,12 @@ import pyrogram
 from pyrogram import raw
 
 
-class HideStories:
-    async def hide_stories(
+class ShowChatStories:
+    async def show_chat_stories(
         self: "pyrogram.Client",
         chat_id: Union[int, str],
-        hidden: bool = None
     ) -> bool:
-        """Toggle peer stories hidden
+        """Show the active stories of a user and display them in the action bar on the homescreen.
 
         .. include:: /_includes/usable-by/users.rst
 
@@ -39,18 +38,18 @@ class HideStories:
                 For a contact that exists in your Telegram address book you can use his phone number (str).
 
         Returns:
-            ``str``: On success, a bool is returned.
+            ``bool``: On success, a bool is returned.
 
         Example:
             .. code-block:: python
 
-                # Export a story link
-                link = app.hide_stories("me")
+                # Show stories from specific chat
+                app.show_chat_stories(chat_id)
         """
         r = await self.invoke(
             raw.functions.stories.TogglePeerStoriesHidden(
                 peer=await self.resolve_peer(chat_id),
-                hidden=hidden
+                hidden=False
             )
         )
 

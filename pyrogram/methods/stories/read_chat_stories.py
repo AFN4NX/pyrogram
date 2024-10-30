@@ -16,57 +16,49 @@
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import AsyncGenerator, Union
+from typing import List, Union
 
 import pyrogram
-from pyrogram import raw
-from pyrogram import types
+from pyrogram import raw, types
 
 
-class GetChatStories:
-    async def get_chat_stories(
+class ReadChatStories:
+    async def read_chat_stories(
         self: "pyrogram.Client",
-        chat_id: Union[int, str]
-    ) -> AsyncGenerator["types.Story", None]:
-        """Get all non expired stories from a chat by using chat identifier.
+        chat_id: Union[int, str],
+        max_id: int = 0,
+    ) -> List[int]:
+        """Mark all stories up to a certain identifier as read, for a given chat.
 
         .. include:: /_includes/usable-by/users.rst
 
         Parameters:
             chat_id (``int`` | ``str``):
-                Unique identifier (int) or username (str) of the target user.
-                For your personal story you can simply use "me" or "self".
+                Unique identifier (int) or username (str) of the target chat.
                 For a contact that exists in your Telegram address book you can use his phone number (str).
 
+            max_id (``int``, *optional*):
+                The id of the last story you want to mark as read.
+                All the stories before this one will be marked as read as well.
+                Defaults to 0 (mark every unread message as read).
+
         Returns:
-            ``Generator``: On success, a generator yielding :obj:`~pyrogram.types.Story` objects is returned.
+            List of ``int``: On success, a list of read stories is returned.
 
         Example:
             .. code-block:: python
 
-                # Get all non expired stories from specific chat
-                async for story in app.get_chat_stories(chat_id):
-                    print(story)
+                # Read all stories
+                await app.read_chat_stories(chat_id)
 
-        Raises:
-            ValueError: In case of invalid arguments.
+                # Mark stories as read only up to the given story id
+                await app.read_chat_stories(chat_id, 123)
         """
-        peer = await self.resolve_peer(chat_id)
-
         r = await self.invoke(
-            raw.functions.stories.GetPeerStories(
-                peer=peer
+            raw.functions.stories.ReadStories(
+                peer=await self.resolve_peer(chat_id),
+                max_id=max_id or (1 << 31) - 1
             )
         )
 
-        users = {i.id: i for i in r.users}
-        chats = {i.id: i for i in r.chats}
-
-        for story in r.stories.stories:
-            yield await types.Story._parse(
-                self,
-                story,
-                users,
-                chats,
-                r.stories.peer
-            )
+        return types.List(r)
