@@ -48,6 +48,12 @@ class StarGift(Object):
         date (``datetime``, *optional*):
             Date when the star gift was received.
 
+        first_sale_date (``datetime``, *optional*):
+            Date when the star gift was first purchased.
+
+        last_sale_date (``datetime``, *optional*):
+            Date when the star gift was last purchased.
+
         from_user (:obj:`~pyrogram.types.User`, *optional*):
             User who sent the star gift.
 
@@ -73,6 +79,9 @@ class StarGift(Object):
 
         is_saved (``bool``, *optional*):
             True, if the star gift is saved in profile.
+
+        is_sold_out (``bool``, *optional*):
+            True, if the star gift is sold out.
     """
 
     def __init__(
@@ -85,6 +94,8 @@ class StarGift(Object):
         caption_entities: List["types.MessageEntity"] = None,
         message_id: Optional[int] = None,
         date: Optional[datetime] = None,
+        first_sale_date: Optional[datetime] = None,
+        last_sale_date: Optional[datetime] = None,
         from_user: Optional["types.User"] = None,
         price: Optional[int] = None,
         convert_price: Optional[int] = None,
@@ -92,7 +103,8 @@ class StarGift(Object):
         total_amount: Optional[int] = None,
         is_limited: Optional[bool] = None,
         is_name_hidden: Optional[bool] = None,
-        is_saved: Optional[bool] = None
+        is_saved: Optional[bool] = None,
+        is_sold_out: Optional[bool] = None
     ):
         super().__init__(client)
 
@@ -102,6 +114,8 @@ class StarGift(Object):
         self.caption_entities = caption_entities
         self.message_id = message_id
         self.date = date
+        self.first_sale_date = first_sale_date
+        self.last_sale_date = last_sale_date
         self.from_user = from_user
         self.price = price
         self.convert_price = convert_price
@@ -110,6 +124,7 @@ class StarGift(Object):
         self.is_limited = is_limited
         self.is_name_hidden = is_name_hidden
         self.is_saved = is_saved
+        self.is_sold_out = is_sold_out
 
     @staticmethod
     async def _parse(
@@ -127,6 +142,9 @@ class StarGift(Object):
             available_amount=getattr(star_gift, "availability_remains", None),
             total_amount=getattr(star_gift, "availability_total", None),
             is_limited=getattr(star_gift, "limited", None),
+            first_sale_date=utils.timestamp_to_datetime(getattr(star_gift, "first_sale_date", None)),
+            last_sale_date=utils.timestamp_to_datetime(getattr(star_gift, "last_sale_date", None)),
+            is_sold_out=getattr(star_gift, "sold_out", None),
             client=client
         )
 

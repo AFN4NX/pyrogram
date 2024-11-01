@@ -237,6 +237,9 @@ class Message(Object, Update):
         video (:obj:`~pyrogram.types.Video`, *optional*):
             Message is a video, information about the video.
 
+        video_processing_pending (``bool``, *optional*):
+            True, if the video is still processing.
+
         alternative_videos (List of :obj:`~pyrogram.types.Video`, *optional*):
             Alternative qualities of the video, if the message is a video.
 
@@ -515,6 +518,7 @@ class Message(Object, Update):
         invoice: "types.Invoice" = None,
         story: "types.Story" = None,
         video: "types.Video" = None,
+        video_processing_pending: bool = None,
         alternative_videos: List["types.Video"] = None,
         voice: "types.Voice" = None,
         video_note: "types.VideoNote" = None,
@@ -638,6 +642,7 @@ class Message(Object, Update):
         self.invoice = invoice
         self.story = story
         self.video = video
+        self.video_processing_pending = video_processing_pending
         self.alternative_videos = alternative_videos
         self.voice = voice
         self.video_note = video_note
@@ -1270,6 +1275,7 @@ class Message(Object, Update):
                 invoice=invoice,
                 story=story,
                 video=video,
+                video_processing_pending=getattr(message, "video_processing_pending", None),
                 alternative_videos=types.List(alternative_videos) if alternative_videos else None,
                 video_note=video_note,
                 sticker=sticker,

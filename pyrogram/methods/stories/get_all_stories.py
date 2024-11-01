@@ -30,7 +30,7 @@ class GetAllStories:
         hidden: Optional[bool] = None,
         state: Optional[str] = None,
     ) -> AsyncGenerator["types.Story", None]:
-        """Get all active (or hidden stories that displayed on the action bar on the homescreen.
+        """Get all active or hidden stories that displayed on the action bar on the homescreen.
 
         .. include:: /_includes/usable-by/users.rst
 
