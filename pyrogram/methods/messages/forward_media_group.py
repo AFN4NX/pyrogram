@@ -35,7 +35,8 @@ class ForwardMediaGroup:
         schedule_date: datetime = None,
         hide_sender_name: bool = None,
         hide_captions: bool = None,
-        protect_content: bool = None
+        protect_content: bool = None,
+        allow_paid_broadcast: bool = None
     ) -> List["types.Message"]:
         """Forward a media group by providing one of the message ids.
 
@@ -75,6 +76,12 @@ class ForwardMediaGroup:
             protect_content (``bool``, *optional*):
                 Protects the contents of the sent message from forwarding and saving.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
         Returns:
             List of :obj:`~pyrogram.types.Message`: On success, a list of forwarded messages is returned.
 
@@ -97,6 +104,7 @@ class ForwardMediaGroup:
                 drop_author=hide_sender_name,
                 drop_media_captions=hide_captions,
                 noforwards=protect_content,
+                allow_paid_floodskip=allow_paid_broadcast,
                 top_msg_id=message_thread_id
             )
         )

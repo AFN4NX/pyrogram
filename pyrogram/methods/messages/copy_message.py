@@ -43,6 +43,7 @@ class CopyMessage:
         protect_content: bool = None,
         has_spoiler: bool = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -137,6 +138,7 @@ class CopyMessage:
             schedule_date=schedule_date,
             protect_content=protect_content,
             has_spoiler=has_spoiler,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup,
             business_connection_id=business_connection_id
         )

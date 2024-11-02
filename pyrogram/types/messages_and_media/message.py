@@ -1453,6 +1453,7 @@ class Message(Object, Update):
         schedule_date: datetime = None,
         protect_content: bool = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup=None
     ) -> "Message":
         """Bound method *reply_text* of :obj:`~pyrogram.types.Message`.
@@ -1526,6 +1527,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -1564,6 +1571,7 @@ class Message(Object, Update):
             schedule_date=schedule_date,
             protect_content=protect_content,
             business_connection_id=business_connection_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup
         )
 
@@ -1583,6 +1591,7 @@ class Message(Object, Update):
         thumb: str = None,
         disable_notification: bool = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -1677,6 +1686,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -1741,6 +1756,7 @@ class Message(Object, Update):
             quote_text=quote_text,
             quote_entities=quote_entities,
             business_connection_id=business_connection_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup,
             progress=progress,
             progress_args=progress_args
@@ -1764,6 +1780,7 @@ class Message(Object, Update):
         quote_text: str = None,
         quote_entities: List["types.MessageEntity"] = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -1850,6 +1867,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -1913,6 +1936,7 @@ class Message(Object, Update):
             quote_text=quote_text,
             quote_entities=quote_entities,
             business_connection_id=business_connection_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup,
             progress=progress,
             progress_args=progress_args
@@ -1931,6 +1955,7 @@ class Message(Object, Update):
         quote_text: str = None,
         quote_entities: List["types.MessageEntity"] = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -1994,6 +2019,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -2028,6 +2059,7 @@ class Message(Object, Update):
             quote_text=quote_text,
             quote_entities=quote_entities,
             business_connection_id=business_connection_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup
         )
 
@@ -2094,6 +2126,7 @@ class Message(Object, Update):
         parse_mode: Optional["enums.ParseMode"] = None,
         quote_entities: List["types.MessageEntity"] = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -2164,6 +2197,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -2200,6 +2239,7 @@ class Message(Object, Update):
             parse_mode=parse_mode,
             quote_entities=quote_entities,
             business_connection_id=business_connection_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup
         )
 
@@ -2222,6 +2262,7 @@ class Message(Object, Update):
         schedule_date: datetime = None,
         protect_content: bool = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -2318,6 +2359,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -2382,6 +2429,7 @@ class Message(Object, Update):
             schedule_date=schedule_date,
             protect_content=protect_content,
             business_connection_id=business_connection_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup,
             progress=progress,
             progress_args=progress_args
@@ -2395,7 +2443,7 @@ class Message(Object, Update):
         message_thread_id: int = None,
         effect_id: int = None,
         reply_to_message_id: int = None,
-        business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -2443,6 +2491,12 @@ class Message(Object, Update):
             reply_to_message_id (``int``, *optional*):
                 If the message is a reply, ID of the original message.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup`, *optional*):
                 An object for an inline keyboard. If empty, one ‘Play game_title’ button will be shown automatically.
                 If not empty, the first button must launch the game.
@@ -2469,6 +2523,7 @@ class Message(Object, Update):
             message_thread_id=message_thread_id,
             effect_id=effect_id,
             reply_to_message_id=reply_to_message_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup
         )
 
@@ -2573,6 +2628,7 @@ class Message(Object, Update):
         quote_text: str = None,
         quote_entities: List["types.MessageEntity"] = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -2633,6 +2689,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -2666,6 +2728,7 @@ class Message(Object, Update):
             quote_text=quote_text,
             quote_entities=quote_entities,
             business_connection_id=business_connection_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup
         )
 
@@ -2680,6 +2743,7 @@ class Message(Object, Update):
         quote_text: str = None,
         parse_mode: Optional["enums.ParseMode"] = None,
         quote_entities: List["types.MessageEntity"] = None,
+        allow_paid_broadcast: bool = None,
         business_connection_id: str = None
     ) -> List["types.Message"]:
         """Bound method *reply_media_group* of :obj:`~pyrogram.types.Message`.
@@ -2734,6 +2798,12 @@ class Message(Object, Update):
             quote_entities (List of :obj:`~pyrogram.types.MessageEntity`):
                 List of special entities that appear in quote text, which can be specified instead of *parse_mode*.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
@@ -2766,6 +2836,7 @@ class Message(Object, Update):
             quote_text=quote_text,
             parse_mode=parse_mode,
             quote_entities=quote_entities,
+            allow_paid_broadcast=allow_paid_broadcast,
             business_connection_id=business_connection_id
         )
 
@@ -2786,6 +2857,7 @@ class Message(Object, Update):
         quote_entities: List["types.MessageEntity"] = None,
         view_once: bool = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -2869,6 +2941,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -2931,6 +3009,7 @@ class Message(Object, Update):
             quote_entities=quote_entities,
             view_once=view_once,
             business_connection_id=business_connection_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup,
             progress=progress,
             progress_args=progress_args
@@ -2965,6 +3044,7 @@ class Message(Object, Update):
         schedule_date: datetime = None,
         business_connection_id: str = None,
         options_parse_mode: List["types.MessageEntity"] = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -3090,6 +3170,12 @@ class Message(Object, Update):
                 By default, texts are parsed using both Markdown and HTML styles.
                 You can combine both syntaxes together.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -3140,6 +3226,7 @@ class Message(Object, Update):
             schedule_date=schedule_date,
             business_connection_id=business_connection_id,
             options_parse_mode=options_parse_mode,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup
         )
 
@@ -3155,6 +3242,7 @@ class Message(Object, Update):
         parse_mode: Optional["enums.ParseMode"] = None,
         quote_entities: List["types.MessageEntity"] = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -3220,6 +3308,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -3277,6 +3371,7 @@ class Message(Object, Update):
             parse_mode=parse_mode,
             quote_entities=quote_entities,
             business_connection_id=business_connection_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup,
             progress=progress,
             progress_args=progress_args
@@ -3299,6 +3394,7 @@ class Message(Object, Update):
         parse_mode: Optional["enums.ParseMode"] = None,
         quote_entities: List["types.MessageEntity"] = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -3378,6 +3474,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -3416,6 +3518,7 @@ class Message(Object, Update):
             parse_mode=parse_mode,
             quote_entities=quote_entities,
             business_connection_id=business_connection_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup
         )
 
@@ -3441,6 +3544,7 @@ class Message(Object, Update):
         quote_entities: List["types.MessageEntity"] = None,
         no_sound: bool = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -3542,6 +3646,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -3609,6 +3719,7 @@ class Message(Object, Update):
             quote_entities=quote_entities,
             no_sound=no_sound,
             business_connection_id=business_connection_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup,
             progress=progress,
             progress_args=progress_args
@@ -3631,6 +3742,7 @@ class Message(Object, Update):
         protect_content: bool = None,
         view_once: bool = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -3715,6 +3827,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -3777,6 +3895,7 @@ class Message(Object, Update):
             protect_content=protect_content,
             view_once=view_once,
             business_connection_id=business_connection_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup,
             progress=progress,
             progress_args=progress_args
@@ -3798,6 +3917,7 @@ class Message(Object, Update):
         quote_entities: List["types.MessageEntity"] = None,
         view_once: bool = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -3876,6 +3996,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -3937,6 +4063,7 @@ class Message(Object, Update):
             quote_entities=quote_entities,
             view_once=view_once,
             business_connection_id=business_connection_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup,
             progress=progress,
             progress_args=progress_args
@@ -3964,6 +4091,7 @@ class Message(Object, Update):
         schedule_date: datetime = None,
         protect_content: bool = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -4052,6 +4180,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -4092,6 +4226,7 @@ class Message(Object, Update):
             schedule_date=schedule_date,
             protect_content=protect_content,
             business_connection_id=business_connection_id,
+            allow_paid_broadcast=allow_paid_broadcast,
             reply_markup=reply_markup
         )
 
@@ -4299,7 +4434,8 @@ class Message(Object, Update):
         disable_notification: bool = None,
         hide_sender_name: bool = None,
         hide_captions: bool = None,
-        schedule_date: datetime = None
+        schedule_date: datetime = None,
+        allow_paid_broadcast: bool = None
     ) -> Union["types.Message", List["types.Message"]]:
         """Bound method *forward* of :obj:`~pyrogram.types.Message`.
 
@@ -4341,6 +4477,12 @@ class Message(Object, Update):
             hide_captions (``bool``, *optional*):
                 If True, the original media captions will be removed.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
         Returns:
             On success, the forwarded Message is returned.
 
@@ -4355,7 +4497,8 @@ class Message(Object, Update):
             disable_notification=disable_notification,
             schedule_date=schedule_date,
             hide_sender_name=hide_sender_name,
-            hide_captions=hide_captions
+            hide_captions=hide_captions,
+            allow_paid_broadcast=allow_paid_broadcast
         )
 
     async def copy(
@@ -4374,6 +4517,7 @@ class Message(Object, Update):
         protect_content: bool = None,
         has_spoiler: bool = None,
         business_connection_id: str = None,
+        allow_paid_broadcast: bool = None,
         reply_markup: Union[
             "types.InlineKeyboardMarkup",
             "types.ReplyKeyboardMarkup",
@@ -4445,6 +4589,12 @@ class Message(Object, Update):
             business_connection_id (``str``, *optional*):
                 Unique identifier of the business connection on behalf of which the message will be sent.
 
+            allow_paid_broadcast (``bool``, *optional*):
+                If True, you will be allowed to send up to 1000 messages per second.
+                Ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message.
+                The relevant Stars will be withdrawn from the bot's balance.
+                For bots only.
+
             reply_markup (:obj:`~pyrogram.types.InlineKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardMarkup` | :obj:`~pyrogram.types.ReplyKeyboardRemove` | :obj:`~pyrogram.types.ForceReply`, *optional*):
                 Additional interface options. An object for an inline keyboard, custom reply keyboard,
                 instructions to remove reply keyboard or to force a reply from the user.
@@ -4481,6 +4631,7 @@ class Message(Object, Update):
                 schedule_date=schedule_date,
                 protect_content=protect_content,
                 business_connection_id=business_connection_id,
+                allow_paid_broadcast=allow_paid_broadcast,
                 reply_markup=self.reply_markup if reply_markup is object else reply_markup
             )
         elif self.media:
@@ -4497,6 +4648,7 @@ class Message(Object, Update):
                 protect_content=protect_content,
                 has_spoiler=self.has_media_spoiler if has_spoiler is None else has_spoiler,
                 business_connection_id=business_connection_id,
+                allow_paid_broadcast=allow_paid_broadcast,
                 reply_markup=self.reply_markup if reply_markup is object else reply_markup
             )
 
@@ -4526,6 +4678,7 @@ class Message(Object, Update):
                     disable_notification=disable_notification,
                     message_thread_id=message_thread_id,
                     schedule_date=schedule_date,
+                    allow_paid_broadcast=allow_paid_broadcast,
                     business_connection_id=business_connection_id
                 )
             elif self.location:
@@ -4536,6 +4689,7 @@ class Message(Object, Update):
                     disable_notification=disable_notification,
                     message_thread_id=message_thread_id,
                     schedule_date=schedule_date,
+                    allow_paid_broadcast=allow_paid_broadcast,
                     business_connection_id=business_connection_id
                 )
             elif self.venue:
@@ -4550,6 +4704,7 @@ class Message(Object, Update):
                     disable_notification=disable_notification,
                     message_thread_id=message_thread_id,
                     schedule_date=schedule_date,
+                    allow_paid_broadcast=allow_paid_broadcast,
                     business_connection_id=business_connection_id
                 )
             elif self.poll:
@@ -4560,6 +4715,7 @@ class Message(Object, Update):
                     disable_notification=disable_notification,
                     message_thread_id=message_thread_id,
                     schedule_date=schedule_date,
+                    allow_paid_broadcast=allow_paid_broadcast,
                     business_connection_id=business_connection_id
                 )
             elif self.game:
@@ -4567,6 +4723,7 @@ class Message(Object, Update):
                     chat_id,
                     game_short_name=self.game.short_name,
                     disable_notification=disable_notification,
+                    allow_paid_broadcast=allow_paid_broadcast,
                     message_thread_id=message_thread_id
                 )
             else:
