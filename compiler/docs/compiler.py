@@ -521,6 +521,11 @@ def pyrogram_api():
             Audio
             AvailableEffect
             Document
+            ForumTopic
+            ForumTopicClosed
+            ForumTopicCreated
+            ForumTopicEdited
+            ForumTopicReopened
             Animation
             Video
             Voice
@@ -583,7 +588,6 @@ def pyrogram_api():
             MenuButtonWebApp
             MenuButtonDefault
             SentWebAppMessage
-            ForumTopic
             RequestChannelInfo
             RequestChatInfo
             RequestUserInfo

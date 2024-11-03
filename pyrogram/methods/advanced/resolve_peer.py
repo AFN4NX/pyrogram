@@ -73,11 +73,16 @@ class ResolvePeer:
                     try:
                         return await self.storage.get_peer_by_username(peer_id)
                     except KeyError:
-                        await self.invoke(
+                        r = await self.invoke(
                             raw.functions.contacts.ResolveUsername(
                                 username=peer_id
                             )
                         )
+
+                        if isinstance(r.peer, raw.types.PeerUser):
+                            return await self.storage.get_peer_by_id(r.peer.user_id)
+                        elif isinstance(r.peer, raw.types.PeerChannel):
+                            return await self.storage.get_peer_by_id(utils.get_channel_id(r.peer.channel_id))
 
                         return await self.storage.get_peer_by_username(peer_id)
                 else:
@@ -102,20 +107,24 @@ class ResolvePeer:
                     )
                 )
             elif peer_type == "chat":
-                await self.invoke(
-                    raw.functions.messages.GetChats(
-                        id=[-peer_id]
+                await self.fetch_peers(
+                    await self.invoke(
+                        raw.functions.messages.GetChats(
+                            id=[-peer_id]
+                        )
                     )
                 )
             else:
-                await self.invoke(
-                    raw.functions.channels.GetChannels(
-                        id=[
-                            raw.types.InputChannel(
-                                channel_id=utils.get_channel_id(peer_id),
-                                access_hash=0
-                            )
-                        ]
+                await self.fetch_peers(
+                    await self.invoke(
+                        raw.functions.channels.GetChannels(
+                            id=[
+                                raw.types.InputChannel(
+                                    channel_id=utils.get_channel_id(peer_id),
+                                    access_hash=0
+                                )
+                            ]
+                        )
                     )
                 )
 
