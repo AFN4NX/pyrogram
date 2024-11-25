@@ -870,7 +870,7 @@ class Message(Object, Update):
                 web_app_data = types.WebAppData._parse(action)
                 service_type = enums.MessageServiceType.WEB_APP_DATA
             elif isinstance(action, raw.types.MessageActionGiveawayLaunch):
-                giveaway_created = await types.GiveawayCreated._parse(client, action)
+                giveaway_created = types.GiveawayCreated._parse(client, action)
                 service_type = enums.MessageServiceType.GIVEAWAY_CREATED
             elif isinstance(action, raw.types.MessageActionGiveawayResults):
                 service_type = enums.MessageServiceType.GIVEAWAY_COMPLETED

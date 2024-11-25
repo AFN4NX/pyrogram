@@ -571,6 +571,6 @@ def from_inline_bytes(data: bytes, file_name: str = None) -> BytesIO:
     b = BytesIO()
 
     b.write(data)
-    b.name = file_name if file_name else f"photo_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.jpg"
+    b.name = file_name or f"photo_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.jpg"
 
     return b

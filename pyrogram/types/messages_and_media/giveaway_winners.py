@@ -113,9 +113,9 @@ class GiveawayWinners(Object):
     @staticmethod
     async def _parse(
         client,
-        chats: dict,
+        giveaway_media: "raw.types.MessageMediaGiveawayResults",
         users: dict,
-        giveaway_media: "raw.types.MessageMediaGiveawayResults"
+        chats: dict
     ) -> "GiveawayWinners":
         if not isinstance(giveaway_media, raw.types.MessageMediaGiveawayResults):
             return
