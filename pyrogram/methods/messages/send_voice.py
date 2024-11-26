@@ -111,7 +111,7 @@ class SendVoice:
                 If the message is a reply, ID of the original chat.
 
             reply_to_story_id (``int``, *optional*):
-                Unique identifier for the target story.
+                If the message is a reply, ID of the target story.
 
             quote_text (``str``, *optional*):
                 Text of the quote to be sent.

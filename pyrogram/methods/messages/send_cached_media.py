@@ -93,7 +93,7 @@ class SendCachedMedia:
                 If the message is a reply, ID of the original message.
 
             reply_to_story_id (``int``, *optional*):
-                Unique identifier for the target story.
+                If the message is a reply, ID of the target story.
 
             quote_text (``str``, *optional*):
                 Text of the quote to be sent.

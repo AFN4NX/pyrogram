@@ -29,14 +29,15 @@ class SendInlineBotResult:
         chat_id: Union[int, str],
         query_id: int,
         result_id: str,
-        disable_notification: bool = None,
-        message_thread_id: int = None,
-        reply_to_message_id: int = None,
+        disable_notification: Optional[bool] = None,
+        message_thread_id: Optional[int] = None,
+        reply_to_message_id: Optional[int] = None,
         reply_to_chat_id: Union[int, str] = None,
-        quote_text: str = None,
+        reply_to_story_id: Optional[int] = None,
+        quote_text: Optional[str] = None,
         parse_mode: Optional["enums.ParseMode"] = None,
-        quote_entities: List["types.MessageEntity"] = None,
-        quote_offset: int = None
+        quote_entities: Optional[List["types.MessageEntity"]] = None,
+        quote_offset: Optional[int] = None
     ) -> "raw.base.Updates":
         """Send an inline bot result.
         Bot results can be retrieved using :meth:`~pyrogram.Client.get_inline_bot_results`
@@ -68,6 +69,9 @@ class SendInlineBotResult:
 
             reply_to_chat_id (``int``, *optional*):
                 If the message is a reply, ID of the original chat.
+
+            reply_to_story_id (``int``, *optional*):
+                If the message is a reply, ID of the target story.
 
             quote_text (``str``, *optional*):
                 Text of the quote to be sent.
@@ -102,6 +106,7 @@ class SendInlineBotResult:
                 reply_to=utils.get_reply_to(
                     reply_to_message_id=reply_to_message_id,
                     reply_to_peer=await self.resolve_peer(reply_to_chat_id) if reply_to_chat_id else None,
+                    reply_to_story_id=reply_to_story_id,
                     message_thread_id=message_thread_id,
                     quote_text=quote_text,
                     quote_entities=quote_entities,
