@@ -3234,12 +3234,15 @@ class Message(Object, Update):
         self,
         sticker: Union[str, BinaryIO],
         quote: bool = None,
+        emoji: str = "",
+        caption: str = "",
+        parse_mode: Optional["enums.ParseMode"] = None,
+        caption_entities: List["types.MessageEntity"] = None,
         disable_notification: bool = None,
         message_thread_id: int = None,
         effect_id: int = None,
         reply_to_message_id: int = None,
         quote_text: str = None,
-        parse_mode: Optional["enums.ParseMode"] = None,
         quote_entities: List["types.MessageEntity"] = None,
         business_connection_id: str = None,
         allow_paid_broadcast: bool = None,
@@ -3280,6 +3283,19 @@ class Message(Object, Update):
                 If *reply_to_message_id* is passed, this parameter will be ignored.
                 Defaults to ``True`` in group chats and ``False`` in private chats.
 
+            emoji (``str``, *optional*):
+                Emoji associated with this sticker.
+
+            caption (``str``, *optional*):
+                Sticker caption, 0-1024 characters.
+
+            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+                By default, texts are parsed using both Markdown and HTML styles.
+                You can combine both syntaxes together.
+
+            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`):
+                List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+
             disable_notification (``bool``, *optional*):
                 Sends the message silently.
                 Users will receive a notification with no sound.
@@ -3297,10 +3313,6 @@ class Message(Object, Update):
 
             quote_text (``str``):
                 Text of the quote to be sent.
-
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
-                By default, texts are parsed using both Markdown and HTML styles.
-                You can combine both syntaxes together.
 
             quote_entities (List of :obj:`~pyrogram.types.MessageEntity`):
                 List of special entities that appear in quote text, which can be specified instead of *parse_mode*.
@@ -3363,12 +3375,15 @@ class Message(Object, Update):
         return await self._client.send_sticker(
             chat_id=self.chat.id,
             sticker=sticker,
+            emoji=emoji,
+            caption=caption,
+            parse_mode=parse_mode,
+            caption_entities=caption_entities,
             disable_notification=disable_notification,
             message_thread_id=message_thread_id,
             effect_id=effect_id,
             reply_to_message_id=reply_to_message_id,
             quote_text=quote_text,
-            parse_mode=parse_mode,
             quote_entities=quote_entities,
             business_connection_id=business_connection_id,
             allow_paid_broadcast=allow_paid_broadcast,

@@ -36,6 +36,10 @@ class SendSticker:
         self: "pyrogram.Client",
         chat_id: Union[int, str],
         sticker: Union[str, BinaryIO],
+        emoji: str = "",
+        caption: str = "",
+        parse_mode: Optional["enums.ParseMode"] = None,
+        caption_entities: List["types.MessageEntity"] = None,
         disable_notification: bool = None,
         message_thread_id: int = None,
         effect_id: int = None,
@@ -43,7 +47,6 @@ class SendSticker:
         reply_to_chat_id: Union[int, str] = None,
         reply_to_story_id: int = None,
         quote_text: str = None,
-        parse_mode: Optional["enums.ParseMode"] = None,
         quote_entities: List["types.MessageEntity"] = None,
         quote_offset: int = None,
         schedule_date: datetime = None,
@@ -76,6 +79,19 @@ class SendSticker:
                 pass a file path as string to upload a new sticker that exists on your local machine, or
                 pass a binary file-like object with its attribute ".name" set for in-memory uploads.
 
+            emoji (``str``, *optional*):
+                Emoji associated with this sticker.
+
+            caption (``str``, *optional*):
+                Sticker caption, 0-1024 characters.
+
+            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
+                By default, texts are parsed using both Markdown and HTML styles.
+                You can combine both syntaxes together.
+
+            caption_entities (List of :obj:`~pyrogram.types.MessageEntity`):
+                List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+
             disable_notification (``bool``, *optional*):
                 Sends the message silently.
                 Users will receive a notification with no sound.
@@ -99,10 +115,6 @@ class SendSticker:
 
             quote_text (``str``, *optional*):
                 Text of the quote to be sent.
-
-            parse_mode (:obj:`~pyrogram.enums.ParseMode`, *optional*):
-                By default, texts are parsed using both Markdown and HTML styles.
-                You can combine both syntaxes together.
 
             quote_entities (List of :obj:`~pyrogram.types.MessageEntity`, *optional*):
                 List of special entities that appear in quote text, which can be specified instead of *parse_mode*.
@@ -175,7 +187,11 @@ class SendSticker:
                         mime_type=self.guess_mime_type(sticker) or "image/webp",
                         file=file,
                         attributes=[
-                            raw.types.DocumentAttributeFilename(file_name=os.path.basename(sticker))
+                            raw.types.DocumentAttributeFilename(file_name=os.path.basename(sticker)),
+                            raw.types.DocumentAttributeSticker(
+                                alt=emoji,
+                                stickerset=raw.types.InputStickerSetEmpty()
+                            ),
                         ]
                     )
                 elif re.match("^https?://", sticker):
@@ -190,7 +206,11 @@ class SendSticker:
                     mime_type=self.guess_mime_type(sticker.name) or "image/webp",
                     file=file,
                     attributes=[
-                        raw.types.DocumentAttributeFilename(file_name=sticker.name)
+                        raw.types.DocumentAttributeFilename(file_name=sticker.name),
+                        raw.types.DocumentAttributeSticker(
+                            alt=emoji,
+                            stickerset=raw.types.InputStickerSetEmpty()
+                        ),
                     ]
                 )
 
@@ -218,8 +238,8 @@ class SendSticker:
                             noforwards=protect_content,
                             allow_paid_floodskip=allow_paid_broadcast,
                             reply_markup=await reply_markup.write(self) if reply_markup else None,
-                            message="",
-                            effect=effect_id
+                            effect=effect_id,
+                            **await utils.parse_text_entities(self, caption, parse_mode, caption_entities)
                         ),
                         business_connection_id=business_connection_id
                     )
@@ -236,7 +256,8 @@ class SendSticker:
                                 {i.id: i for i in r.users},
                                 {i.id: i for i in r.chats},
                                 is_scheduled=isinstance(i, raw.types.UpdateNewScheduledMessage),
-                                business_connection_id=getattr(i, "connection_id", None)
+                                business_connection_id=getattr(i, "connection_id", None),
+                                raw_reply_to_message=getattr(i, "reply_to_message", None),
                             )
         except StopTransmission:
             return None
