@@ -16,8 +16,10 @@
 #  You should have received a copy of the GNU Lesser General Public License
 #  along with Pyrogram.  If not, see <http://www.gnu.org/licenses/>.
 
+from datetime import datetime
 from typing import Union, Optional
 
+from pyrogram import utils
 from pyrogram import raw
 from pyrogram import types
 from ..object import Object
@@ -49,13 +51,16 @@ class SuccessfulPayment(Object):
             Payment information provided by the user. Only available to the bot that received the payment.
 
         is_recurring (``bool``, *optional*):
-            True, if this is a recurring payment.
+            True, if the payment is a recurring payment for a subscription.
 
         is_first_recurring (``bool``, *optional*):
-            True, if this is the first recurring payment.
+            True, if the payment is the first payment for a subscription.
 
         invoice_slug (``str``, *optional*):
             Name of the invoice.
+
+        subscription_expiration_date (:py:obj:`~datetime.datetime`, *optional*):
+            Expiration date of the subscription, in Unix time; for recurring payments only.
     """
 
     def __init__(
@@ -69,7 +74,8 @@ class SuccessfulPayment(Object):
         order_info: Optional["types.OrderInfo"] = None,
         is_recurring: Optional[bool] = None,
         is_first_recurring: Optional[bool] = None,
-        invoice_slug: Optional[str] = None
+        invoice_slug: Optional[str] = None,
+        subscription_expiration_date: datetime = None,
     ):
         super().__init__()
 
@@ -83,6 +89,7 @@ class SuccessfulPayment(Object):
         self.is_recurring = is_recurring
         self.is_first_recurring = is_first_recurring
         self.invoice_slug = invoice_slug
+        self.subscription_expiration_date = subscription_expiration_date
 
     @staticmethod
     def _parse(
@@ -136,4 +143,5 @@ class SuccessfulPayment(Object):
             is_recurring=getattr(successful_payment, "recurring_used", None),
             is_first_recurring=getattr(successful_payment, "recurring_init", None),
             invoice_slug=getattr(successful_payment, "invoice_slug", None),
+            subscription_expiration_date=utils.timestamp_to_datetime(successful_payment.subscription_until_date),
         )

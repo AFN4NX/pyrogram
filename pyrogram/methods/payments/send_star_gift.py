@@ -59,6 +59,7 @@ class SendStarGift:
 
             hide_my_name (``bool``, *optional*):
                 If True, your name will be hidden from visitors to the gift recipient's profile.
+                For userbots only.
                 Defaults to None.
 
         Returns:

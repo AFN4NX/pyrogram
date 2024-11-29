@@ -82,6 +82,10 @@ class StarGift(Object):
 
         is_sold_out (``bool``, *optional*):
             True, if the star gift is sold out.
+
+        is_converted (``bool``, *optional*):
+            True, if the gift was converted to Telegram Stars.
+            Only for the receiver of the gift.
     """
 
     def __init__(
@@ -104,7 +108,8 @@ class StarGift(Object):
         is_limited: Optional[bool] = None,
         is_name_hidden: Optional[bool] = None,
         is_saved: Optional[bool] = None,
-        is_sold_out: Optional[bool] = None
+        is_sold_out: Optional[bool] = None,
+        is_converted: Optional[bool] = None
     ):
         super().__init__(client)
 
@@ -125,6 +130,7 @@ class StarGift(Object):
         self.is_name_hidden = is_name_hidden
         self.is_saved = is_saved
         self.is_sold_out = is_sold_out
+        self.is_converted = is_converted
 
     @staticmethod
     async def _parse(
@@ -187,7 +193,7 @@ class StarGift(Object):
         message: "raw.base.Message",
         users: dict
     ) -> "StarGift":
-        action = message.action
+        action = message.action  # type: raw.types.MessageActionStarGift
 
         doc = action.gift.sticker
         attributes = {type(i): i for i in doc.attributes}
@@ -209,6 +215,7 @@ class StarGift(Object):
             is_limited=getattr(action.gift, "limited", None),
             is_name_hidden=getattr(action, "name_hidden", None),
             is_saved=getattr(action, "saved", None),
+            is_converted=getattr(action, "converted", None),
             from_user=types.User._parse(client, users.get(utils.get_raw_peer_id(message.peer_id))),
             message_id=message.id,
             caption=caption,

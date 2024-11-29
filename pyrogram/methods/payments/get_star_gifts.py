@@ -25,9 +25,9 @@ class GetStarGifts:
     async def get_star_gifts(
         self: "pyrogram.Client",
     ) -> List["types.StarGift"]:
-        """Get all available star gifts to send.
+        """Get all available star gifts that can be sent to other users.
 
-        .. include:: /_includes/usable-by/users.rst
+        .. include:: /_includes/usable-by/users-bots.rst
 
         Returns:
             List of :obj:`~pyrogram.types.StarGift`: On success, a list of star gifts is returned.
